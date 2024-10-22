@@ -1,0 +1,127 @@
+.form_body {
+    max-width: 800px;
+    margin: 100px 250px; 
+    padding: 2rem;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  h1 {
+    text-align: center;
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 1.5rem;
+  }
+  
+  form > div {
+    margin-bottom: 1.5rem;
+  }
+  
+  label {
+    font-size: 1.1rem;
+    color: #555;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  
+  input[type="text"],
+  input[type="number"],
+  input[type="file"],
+  textarea,
+  select {
+    width: 100%;
+    padding: 0.8rem;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+  }
+  
+  input[type="file"] {
+    padding: 0.5rem;
+  }
+  
+  input:focus,
+  textarea:focus,
+  select:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+  
+  textarea {
+    min-height: 100px;
+  }
+  
+  button {
+    background-color: #007bff;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 1rem;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  button[type="button"] {
+    background-color: #28a745;
+  }
+  
+  button[type="button"]:hover {
+    background-color: #218838;
+  }
+  
+  button[type="submit"] {
+    width: 100%;
+  }
+  
+  .dynamic-field {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  .dynamic-field input[type="text"],
+  .dynamic-field input[type="number"] {
+    width: calc(33.33% - 1rem);
+  }
+  
+  .dynamic-field input {
+    margin-right: 1rem;
+  }
+  
+  button.add-more {
+    display: block;
+    background-color: #ffc107;
+    color: white;
+    margin-top: 1rem;
+  }
+  
+  button.add-more:hover {
+    background-color: #e0a800;
+  }
+  
+  @media (max-width: 600px) {
+    .dynamic-field {
+      flex-direction: column;
+    }
+  
+    .dynamic-field input {
+      width: 100%;
+      margin-bottom: 1rem;
+    }
+  
+    button[type="submit"] {
+      width: 100%;
+      padding: 0.8rem 0;
+    }
+  }
+  
