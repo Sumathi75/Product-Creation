@@ -1,7 +1,10 @@
 import { useState } from 'react';
 import "./ProductCreationForm.css"
+import { useNavigate } from 'react-router-dom';
 
-function ProductCreationForm({ onSubmit, existingData }) {
+function ProductCreationForm({existingData,addProduct }) {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState(existingData || {
     title: '',
     description: '',
@@ -50,7 +53,7 @@ function ProductCreationForm({ onSubmit, existingData }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    console.log("submitted")
     if (formData.title.length < 3) {
       alert('Title must be at least 3 characters long.');
       return;
@@ -67,8 +70,9 @@ function ProductCreationForm({ onSubmit, existingData }) {
       alert('Please upload exactly 3 main images.');
       return;
     }
-
-    onSubmit(formData);
+    // onsubmit(formData);
+    addProduct(formData.title);
+    navigate("/");
   };
 
   return (

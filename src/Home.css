@@ -1,36 +1,121 @@
+* {
+  background: #e5e5e5;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .home_body {
-    display: flex;
-    flex-direction: column;
-    align-items: center; 
-    width: 800px;
-    height: 500px;
-    justify-content: center;
-    background-color: #f2f2f2; 
-    border: 1px solid black;
-    border-radius: 20px;
-    margin: 100px 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.home_content {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+table {
+  width: 100%;
+  max-width: 800px;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+  border: 2px solid black;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+.link {
+  text-decoration: none;
+  color: white;
+  background-color: #007bff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.link:hover {
+  background-color: #0056b3;
+}
+
+.action-btn {
+  padding: 8px 12px;
+  margin-right: 5px;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+}
+
+.view-btn {
+  background-color: #007bff;
+}
+
+.edit-btn {
+  background-color: #007bff;
+}
+
+.delete-btn {
+  background-color: #007bff;
+}
+
+.action-btn:hover {
+  opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+  .home_content h1 {
+    font-size: 24px;
   }
-  
-  h1 {
-    font-size: 2.5rem; 
-    color: #333;
-    margin-bottom: 2rem; 
-    text-align: center;
+
+  .home_body {
+    padding: 10px;
   }
-  
+
+  table, th, td {
+    font-size: 14px;
+  }
+
+  table {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .action-btn {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .home_content p {
+    font-size: 14px;
+  }
+
+  table, th, td {
+    font-size: 12px;
+    padding: 8px;
+  }
+
   .link {
-    font-size: 1.2rem; 
-    color: #007bff; 
-    text-decoration: none; 
-    padding: 0.5rem 1rem;
-    border: 1px solid transparent; 
-    border-radius: 4px; 
-    transition: background-color 0.3s ease, color 0.3s ease; 
+    padding: 8px 16px;
+    font-size: 14px;
   }
-  
-  .link:hover {
-    background-color: #007bff; 
-    color: white; 
-    border-color: #0056b3; 
+
+  .action-btn {
+    padding: 5px 8px;
+    font-size: 10px;
   }
-  
+}
