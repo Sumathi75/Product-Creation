@@ -27,7 +27,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home products={products} deleteProduct={deleteProduct} editProduct={editProduct} />} />
+        <Route path="/" element={<Home products={products} deleteProduct={deleteProduct} editProduct={editProduct}  />} />
         <Route path="/create-product" element={<ProductCreationForm addProduct={addProduct} />} />
         <Route path="/edit/:id" element={<Edit products={products} editProduct={editProduct} />} />
         <Route path="/view/:id" element={<View products={products}/>} />

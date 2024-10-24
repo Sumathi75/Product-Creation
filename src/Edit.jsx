@@ -17,6 +17,9 @@ function Edit({ products, editproduct }) {
     specifications: [{ name: '', value: '' }],
   });
 
+  const [previewThumbnail, setPreviewThumbnail] = useState(null);
+  const [previewMainImages, setPreviewMainImages] = useState([]);
+
   useEffect(() => {
     const product = products.find((p) => p.id === parseInt(id));
     if (product) {
@@ -32,10 +35,13 @@ function Edit({ products, editproduct }) {
         nutritionValues: product.nutritionValues || [{ name: '', amount: '', unit: '' }],
         specifications: product.specifications || [{ name: '', value: '' }],
       });
+      setPreviewThumbnail(product.thumbnail);
+      setPreviewMainImages(product.mainImages);
     }
   }, [id, products]);
 
   const categories = ['Electronics', 'Clothing', 'Home'];
+
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -46,8 +52,11 @@ function Edit({ products, editproduct }) {
     const { name, files } = e.target;
     if (name === 'thumbnail') {
       setFormData({ ...formData, thumbnail: files[0] });
+      setPreviewThumbnail(URL.createObjectURL(files[0]));
     } else {
-      setFormData({ ...formData, mainImages: Array.from(files) });
+      const mainImagesArray = Array.from(files);
+      setFormData({ ...formData, mainImages: mainImagesArray });
+      setPreviewMainImages(mainImagesArray.map(file => URL.createObjectURL(file)));
     }
   };
 
@@ -70,7 +79,6 @@ function Edit({ products, editproduct }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("submitted");
     
     if (formData.title.length < 3) {
       alert('Title must be at least 3 characters long.');
@@ -127,6 +135,7 @@ function Edit({ products, editproduct }) {
             onChange={handleFileChange}
             required
           />
+          {previewThumbnail && <img src={previewThumbnail} alt="Thumbnail preview" width="100" />}
         </div>
 
         <div>
@@ -139,6 +148,11 @@ function Edit({ products, editproduct }) {
             onChange={handleFileChange}
             required
           />
+           <div>
+          {previewMainImages.map((img, index) => (
+            <img key={index} src={img} alt={`Main ${index}`} width="100" />
+          ))}
+        </div>
         </div>
 
         <div>
@@ -268,7 +282,7 @@ function Edit({ products, editproduct }) {
           Add More Specification
         </button>
 
-        <button type="submit">Save</button>
+        <button type="submit">Update</button>
       </form>
     </>
   );

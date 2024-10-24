@@ -2,10 +2,10 @@ import { useState } from 'react';
 import "./ProductCreationForm.css"
 import { useNavigate } from 'react-router-dom';
 
-function ProductCreationForm({existingData,addProduct }) {
+function ProductCreationForm({ addProduct }) {
   const navigate = useNavigate();
 
-  const [formData, setFormData] = useState(existingData || {
+  const [formData, setFormData] = useState({
     title: '',
     description: '',
     thumbnail: null,
@@ -18,6 +18,9 @@ function ProductCreationForm({existingData,addProduct }) {
     specifications: [{ name: '', value: '' }],
   });
 
+  const [previewThumbnail, setPreviewThumbnail] = useState(null);
+  const [previewMainImages, setPreviewMainImages] = useState([]);
+
   const categories = ['Electronics', 'Clothing', 'Home'];
 
   const handleInputChange = (e) => {
@@ -29,8 +32,11 @@ function ProductCreationForm({existingData,addProduct }) {
     const { name, files } = e.target;
     if (name === 'thumbnail') {
       setFormData({ ...formData, thumbnail: files[0] });
+      setPreviewThumbnail(URL.createObjectURL(files[0]));
     } else {
-      setFormData({ ...formData, mainImages: Array.from(files) });
+      const mainImagesArray = Array.from(files);
+      setFormData({ ...formData, mainImages: mainImagesArray });
+      setPreviewMainImages(mainImagesArray.map(file => URL.createObjectURL(file)));
     }
   };
 
@@ -53,7 +59,6 @@ function ProductCreationForm({existingData,addProduct }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("submitted")
     if (formData.title.length < 3) {
       alert('Title must be at least 3 characters long.');
       return;
@@ -70,9 +75,9 @@ function ProductCreationForm({existingData,addProduct }) {
       alert('Please upload exactly 3 main images.');
       return;
     }
-    // onsubmit(formData);
-    addProduct(formData.title);
+    addProduct(formData);
     navigate("/");
+
   };
 
   return (
@@ -108,6 +113,7 @@ function ProductCreationForm({existingData,addProduct }) {
           onChange={handleFileChange}
           required
         />
+        {previewThumbnail && <img src={previewThumbnail} alt="Thumbnail preview" width="100" />}
       </div>
 
       <div>
@@ -120,6 +126,11 @@ function ProductCreationForm({existingData,addProduct }) {
           onChange={handleFileChange}
           required
         />
+         <div>
+          {previewMainImages.map((img, index) => (
+            <img key={index} src={img} alt={`Main ${index}`} width="100" />
+          ))}
+        </div>
       </div>
 
       <div>
@@ -249,7 +260,7 @@ function ProductCreationForm({existingData,addProduct }) {
         Add More Specification
       </button>
 
-      <button type="submit">Submit</button>
+      <button type="submit">Create Product</button>
     </form>
   );
 }

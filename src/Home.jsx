@@ -19,18 +19,19 @@ function Home({ products, deleteProduct }) {
             </tr>
           </thead>
           <tbody>
-            {products.length > 0 ? (
+            {products && products.length > 0 ? (
               products.map((product) => (
                 <tr key={product.id}>
                   <td>{product.name}</td>
                   <td>
+                  <Link to={`/view/${product.id}`}>
+                      <button>View</button>
+                    </Link>
                     <Link to={`/edit/${product.id}`}>
                       <button>Edit</button>
                     </Link>
                     <button onClick={() => deleteProduct(product.id)}>Delete</button>
-                    <Link to={`/view/${product.id}`}>
-                      <button>View</button>
-                    </Link>
+                    
                   </td>
                 </tr>
               ))
