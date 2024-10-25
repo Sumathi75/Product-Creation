@@ -1,0 +1,48 @@
+.view-body{
+    background: #e5e5e5;
+    border: 1px solid black;
+    padding: 50px;
+    height: 100vh;
+    color: #534f4f;
+}
+.view-details{
+    display: flex;
+    justify-content: space-evenly;
+    padding: 50px;
+}
+.images-slides {
+    position: relative;
+    width: 500px;
+    height: 400px; 
+    overflow: hidden;
+  }
+  
+  .slider-image {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    transition: transform 0.5s ease;
+  }
+  
+  .slider-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 10px;
+  }
+  .slider-button i{
+    color: black;
+    background: transparent;
+  }
+  
+  .slider-button:first-of-type {
+    left: 10px;
+  }
+  
+  .slider-button:last-of-type {
+    right: 10px;
+  }
+  

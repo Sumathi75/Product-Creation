@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import "./ProductCreationForm.css"
+import "./ProductCreationForm.css";
 import { useNavigate } from 'react-router-dom';
 
 function ProductCreationForm({ addProduct }) {
@@ -18,9 +18,6 @@ function ProductCreationForm({ addProduct }) {
     specifications: [{ name: '', value: '' }],
   });
 
-  const [previewThumbnail, setPreviewThumbnail] = useState(null);
-  const [previewMainImages, setPreviewMainImages] = useState([]);
-
   const categories = ['Electronics', 'Clothing', 'Home'];
 
   const handleInputChange = (e) => {
@@ -32,11 +29,9 @@ function ProductCreationForm({ addProduct }) {
     const { name, files } = e.target;
     if (name === 'thumbnail') {
       setFormData({ ...formData, thumbnail: files[0] });
-      setPreviewThumbnail(URL.createObjectURL(files[0]));
     } else {
       const mainImagesArray = Array.from(files);
       setFormData({ ...formData, mainImages: mainImagesArray });
-      setPreviewMainImages(mainImagesArray.map(file => URL.createObjectURL(file)));
     }
   };
 
@@ -76,108 +71,112 @@ function ProductCreationForm({ addProduct }) {
       return;
     }
     addProduct(formData);
-    navigate("/");
-
+    navigate("/"); 
   };
 
   return (
-    <form onSubmit={handleSubmit} className='form_body'>
-      <div>
-        <h1>PRODUCT CREATION FORM</h1>
-        <label>Title:</label>
-        <input
-          type="text"
-          name="title"
-          value={formData.title}
-          onChange={handleInputChange}
-          required
-        />
-      </div>
+    <>
+    <div className='form'>
+      <div className="inner-body">
+      <h2>Product Creation Form</h2>
 
-      <div>
-        <label>Description:</label>
-        <textarea
-          name="description"
-          value={formData.description}
-          onChange={handleInputChange}
-          required
-        />
+      <form onSubmit={handleSubmit} className='form_body'>
+       <div className="form-group">
+       <label >Title:</label>
+      <input
+        className='form-control'
+        type="text"
+        name="title"
+        value={formData.title}
+        onChange={handleInputChange}
+        required
+      />
+       </div>
+      <div className="form-group">
+      <label>Description:</label>
+      <textarea
+        className='form-control'
+        name="description"
+        value={formData.description}
+        onChange={handleInputChange}
+        required
+      />
       </div>
-
-      <div>
-        <label>Thumbnail Image:</label>
-        <input
-          type="file"
-          name="thumbnail"
-          accept="image/jpeg, image/png"
-          onChange={handleFileChange}
-          required
-        />
-        {previewThumbnail && <img src={previewThumbnail} alt="Thumbnail preview" width="100" />}
+     
+     <div className="form-group">
+     <label>Thumbnail Image:</label>
+      <input
+        className='form-control'
+        type="file"
+        name="thumbnail"
+        accept="image/jpeg, image/png"
+        onChange={handleFileChange}
+        required
+      />
+     </div>
+     
+     <div className="form-group">
+     <label>Main Images (Upload exactly 3):</label>
+      <input
+        className='form-control'
+        type="file"
+        name="mainImages"
+        accept="image/jpeg, image/png"
+        multiple
+        onChange={handleFileChange}
+        required
+      />
+      
+     </div>
+      <div className="form-group">
+      <label>Category:</label>
+      <select
+      className='form-control'
+        name="category"
+        value={formData.category}
+        onChange={handleInputChange}
+        required
+      >
+        <option value="">Select Category</option>
+        {categories.map((category, index) => (
+          <option key={index} value={category}>
+            {category}
+          </option>
+        ))}
+      </select>
       </div>
-
-      <div>
-        <label>Main Images (Upload exactly 3):</label>
-        <input
-          type="file"
-          name="mainImages"
-          accept="image/jpeg, image/png"
-          multiple
-          onChange={handleFileChange}
-          required
-        />
-         <div>
-          {previewMainImages.map((img, index) => (
-            <img key={index} src={img} alt={`Main ${index}`} width="100" />
-          ))}
-        </div>
+      
+      <div className="form-group">
+      <label>Stock:</label>
+      <input
+        className='form-control'
+        type="number"
+        name="stock"
+        value={formData.stock}
+        onChange={handleInputChange}
+        min="0"
+        required
+      />
       </div>
-
-      <div>
-        <label>Category:</label>
-        <select
-          name="category"
-          value={formData.category}
-          onChange={handleInputChange}
-          required
-        >
-          <option value="">Select Category</option>
-          {categories.map((category, index) => (
-            <option key={index} value={category}>
-              {category}
-            </option>
-          ))}
-        </select>
+      <div className="form-group">
+      <label>Weight in Grams:</label>
+      <input
+        className='form-control'
+        type="number"
+        name="weight"
+        value={formData.weight}
+        onChange={handleInputChange}
+        min="0"
+        required
+      />
       </div>
-
-      <div>
-        <label>Stock:</label>
-        <input
-          type="number"
-          name="stock"
-          value={formData.stock}
-          onChange={handleInputChange}
-          min="0"
-          required
-        />
-      </div>
-
-      <div>
-        <label>Weight in Grams:</label>
-        <input
-          type="number"
-          name="weight"
-          value={formData.weight}
-          onChange={handleInputChange}
-          min="0"
-          required
-        />
-      </div>
-
+     
+    
       <h3>Country Prices:</h3>
       {formData.countryPrices.map((price, index) => (
-        <div key={index}>
+        <div key={index} className='form-group'>
           <input
+            className='form-control'
             type="text"
             name="countryName"
             placeholder="Country Name"
@@ -185,7 +184,8 @@ function ProductCreationForm({ addProduct }) {
             onChange={(e) => handleFieldChange(e, 'countryPrices', index)}
             required
           />
-          <input
+            <input
+            className='form-control'
             type="text"
             name="countryCode"
             placeholder="Country Code"
@@ -194,6 +194,7 @@ function ProductCreationForm({ addProduct }) {
             required
           />
           <input
+            className='form-control'
             type="number"
             name="price"
             placeholder="Price"
@@ -203,14 +204,14 @@ function ProductCreationForm({ addProduct }) {
           />
         </div>
       ))}
-      <button type="button" onClick={() => handleAddField('countryPrices')}>
+      <button type="button" onClick={() => handleAddField('countryPrices')} className='btns'>
         Add More Country Price
       </button>
-
       <h3>Nutrition Values:</h3>
       {formData.nutritionValues.map((nutrition, index) => (
-        <div key={index}>
+        <div key={index} className='form-group'>
           <input
+           className='form-control'
             type="text"
             name="name"
             placeholder="Name"
@@ -218,6 +219,7 @@ function ProductCreationForm({ addProduct }) {
             onChange={(e) => handleFieldChange(e, 'nutritionValues', index)}
           />
           <input
+           className='form-control'
             type="number"
             name="amount"
             placeholder="Amount"
@@ -225,6 +227,7 @@ function ProductCreationForm({ addProduct }) {
             onChange={(e) => handleFieldChange(e, 'nutritionValues', index)}
           />
           <input
+            className='form-control'
             type="text"
             name="unit"
             placeholder="Unit"
@@ -233,14 +236,14 @@ function ProductCreationForm({ addProduct }) {
           />
         </div>
       ))}
-      <button type="button" onClick={() => handleAddField('nutritionValues')}>
+      <button type="button" onClick={() => handleAddField('nutritionValues')} className='btns'>
         Add More Nutrition Value
       </button>
-
       <h3>Specifications:</h3>
       {formData.specifications.map((spec, index) => (
-        <div key={index}>
+        <div key={index} className='form-group'>
           <input
+            className='form-control'
             type="text"
             name="name"
             placeholder="Name"
@@ -248,6 +251,7 @@ function ProductCreationForm({ addProduct }) {
             onChange={(e) => handleFieldChange(e, 'specifications', index)}
           />
           <input
+            className='form-control'
             type="text"
             name="value"
             placeholder="Value"
@@ -256,12 +260,18 @@ function ProductCreationForm({ addProduct }) {
           />
         </div>
       ))}
-      <button type="button" onClick={() => handleAddField('specifications')}>
+      <button type="button" onClick={() => handleAddField('specifications')} className='btns'>
         Add More Specification
       </button>
-
-      <button type="submit">Create Product</button>
+      <div className="create-btn form-group">
+      <button type="submit" className='btns-c'>Create Product</button>
+      </div>
     </form>
+      </div>
+    </div>
+    </>
+   
+    
   );
 }
 

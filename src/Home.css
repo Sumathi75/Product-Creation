@@ -3,34 +3,52 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 
+}
 .home_body {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  padding: 20px;
+  text-align: center;
 }
-
-.home_content {
+.home-content {
+  width: 50%;
+  padding: 10px;
+  color: #574747;
+}
+.home-content h1{
+  text-decoration: underline;
+}
+.sub-row  .p-list{
+  background: none;
+  margin-bottom: 0;
+}
+.sub-row {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-between;
   text-align: center;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 0;
+  width: 100%;
 }
+
 
 table {
   width: 100%;
   max-width: 800px;
+  border: 1px solid black;
   border-collapse: collapse;
   margin: 20px 0;
 }
 
-th, td {
+th,
+td {
   padding: 10px;
   text-align: left;
-  border: 2px solid black;
 }
 
 th {
@@ -40,82 +58,27 @@ th {
 .link {
   text-decoration: none;
   color: white;
-  background-color: #007bff;
+  background-color: #777575;
   padding: 10px 20px;
   border-radius: 5px;
-  margin-top: 10px;
+}
+Link {
+  border-radius: 5px;
 }
 
 .link:hover {
-  background-color: #0056b3;
+  background-color: #3c3a3a;
 }
 
-.action-btn {
-  padding: 8px 12px;
-  margin-right: 5px;
-  border: none;
-  border-radius: 4px;
+.btns{
+  border: 1px solid black;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #777575;
+}
+.btns:hover{
+  background-color: #3c3a3a;
   color: white;
-  cursor: pointer;
 }
 
-.view-btn {
-  background-color: #007bff;
-}
 
-.edit-btn {
-  background-color: #007bff;
-}
-
-.delete-btn {
-  background-color: #007bff;
-}
-
-.action-btn:hover {
-  opacity: 0.8;
-}
-
-@media (max-width: 768px) {
-  .home_content h1 {
-    font-size: 24px;
-  }
-
-  .home_body {
-    padding: 10px;
-  }
-
-  table, th, td {
-    font-size: 14px;
-  }
-
-  table {
-    width: 100%;
-    max-width: 100%;
-  }
-
-  .action-btn {
-    padding: 6px 10px;
-    font-size: 12px;
-  }
-}
-
-@media (max-width: 480px) {
-  .home_content p {
-    font-size: 14px;
-  }
-
-  table, th, td {
-    font-size: 12px;
-    padding: 8px;
-  }
-
-  .link {
-    padding: 8px 16px;
-    font-size: 14px;
-  }
-
-  .action-btn {
-    padding: 5px 8px;
-    font-size: 10px;
-  }
-}
